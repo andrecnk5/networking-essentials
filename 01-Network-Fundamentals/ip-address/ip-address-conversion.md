@@ -69,50 +69,100 @@ Para automatizar essas conversões, você pode usar o seguinte script Python:
 
 ```python
 def binario_para_decimal(binario):
-    octetos = binario.split('.')
-    decimal = []
-    for octeto in octetos:
-        decimal.append(str(int(octeto, 2)))
-    return '.'.join(decimal)
+    try:
+        return int(binario, 2)
+    except ValueError:
+        return "Erro: Por favor, insira um número binário válido."
 
 def decimal_para_binario(decimal):
-    octetos = decimal.split('.')
-    binario = []
-    for octeto in octetos:
-        binario.append(format(int(octeto), '08b'))
-    return '.'.join(binario)
+    try:
+        decimal = int(decimal)
+        return bin(decimal)[2:]
+    except ValueError:
+        return "Erro: Por favor, insira um número decimal válido."
 
-# Exemplos de uso
-ip_binario = "11000000.10101000.00000001.00000001"
-ip_decimal = "192.168.1.1"
+def main():
+    print("Escolha a operação:")
+    print("1) Conversão Binário para Decimal")
+    print("2) Conversão Decimal para Binário")
+    
+    operacao = input("Digite o número da operação desejada: ")
+    
+    if operacao not in ["1", "2"]:
+        print("Erro: Selecione uma operação válida.")
+        return
+    
+    numero = input("Insira o número a ser convertido: ")
+    
+    if operacao == "1":
+        resultado = binario_para_decimal(numero)
+    elif operacao == "2":
+        resultado = decimal_para_binario(numero)
+    
+    print("Resultado: ", resultado)
 
-print(f"Binário para Decimal: {binario_para_decimal(ip_binario)}")
-print(f"Decimal para Binário: {decimal_para_binario(ip_decimal)}")
+if __name__ == "__main__":
+    main()
+
 ```
 
 ## Implementação em JavaScript
 
 Para automatizar essas conversões, você pode usar o seguinte script JavaScript:
 
-```javascript
-function binarioParaDecimal(binario) {
-    const octetos = binario.split('.');
-    const decimal = octetos.map(octeto => parseInt(octeto, 2).toString());
-    return decimal.join('.');
-}
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor Binário/Decimal</title>
+    <script>
+        function convert() {
+            const operation = document.getElementById("operation").value;
+            const number = document.getElementById("number").value;
+            let result = '';
 
-function decimalParaBinario(decimal) {
-    const octetos = decimal.split('.');
-    const binario = octetos.map(octeto => ('00000000' + parseInt(octeto, 10).toString(2)).slice(-8));
-    return binario.join('.');
-}
+            if (operation === "1") {
+                // Binário para Decimal
+                result = parseInt(number, 2);
+                if (isNaN(result)) {
+                    result = "Por favor, insira um número binário válido.";
+                }
+            } else if (operation === "2") {
+                // Decimal para Binário
+                const decimalNumber = parseInt(number, 10);
+                if (isNaN(decimalNumber)) {
+                    result = "Por favor, insira um número decimal válido.";
+                } else {
+                    result = decimalNumber.toString(2);
+                }
+            } else {
+                result = "Selecione uma operação válida.";
+            }
 
-// Exemplos de uso
-const ipBinario = "11000000.10101000.00000001.00000001";
-const ipDecimal = "192.168.1.1";
+            document.getElementById("result").textContent = "Resultado: " + result;
+        }
+    </script>
+</head>
+<body>
+    <h1>Conversor Binário/Decimal</h1>
+    <label for="operation">Escolha a operação:</label>
+    <select id="operation">
+        <option value="">Selecione</option>
+        <option value="1">Conversão Binário para Decimal</option>
+        <option value="2">Conversão Decimal para Binário</option>
+    </select>
+    <br><br>
+    <label for="number">Insira o número:</label>
+    <input type="text" id="number">
+    <br><br>
+    <button onclick="convert()">Converter</button>
+    <br><br>
+    <p id="result">Resultado: </p>
+</body>
+</html>
 
-console.log(`Binário para Decimal: ${binarioParaDecimal(ipBinario)}`);
-console.log(`Decimal para Binário: ${decimalParaBinario(ipDecimal)}`);
 ```
 
 Com esses scripts, você pode facilmente converter endereços IPs entre os formatos binário e decimal.
