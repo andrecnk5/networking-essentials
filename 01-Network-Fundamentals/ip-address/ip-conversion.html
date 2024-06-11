@@ -1,51 +1,53 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Conversor Binário/Decimal</title>
     <script>
-        function convert() {
-            const operation = document.getElementById("operation").value;
-            const number = document.getElementById("number").value;
-            let result = '';
+      function convert() {
+        const operation = document.getElementById("operation").value;
+        const number = document.getElementById("number").value;
+        let result = "";
 
-            if (operation === "1") {
-                // Binário para Decimal
-                result = parseInt(number, 2);
-                if (isNaN(result)) {
-                    result = "Por favor, insira um número binário válido.";
-                }
-            } else if (operation === "2") {
-                // Decimal para Binário
-                const decimalNumber = parseInt(number, 10);
-                if (isNaN(decimalNumber)) {
-                    result = "Por favor, insira um número decimal válido.";
-                } else {
-                    result = decimalNumber.toString(2);
-                }
-            } else {
-                result = "Selecione uma operação válida.";
-            }
-
-            document.getElementById("result").textContent = "Resultado: " + result;
+        if (operation === "1") {
+          // Binário para Decimal
+          result = parseInt(number, 2);
+          if (isNaN(result)) {
+            result = "Por favor, insira um número binário válido.";
+          }
+        } else if (operation === "2") {
+          // Decimal para Binário
+          const decimalNumber = parseInt(number, 10);
+          if (isNaN(decimalNumber)) {
+            result = "Por favor, insira um número decimal válido.";
+          } else {
+            result = decimalNumber.toString(2);
+          }
+        } else {
+          result = "Selecione uma operação válida.";
         }
+
+        document.getElementById("result").textContent = "Resultado: " + result;
+      }
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Conversor Binário/Decimal</h1>
     <label for="operation">Escolha a operação:</label>
     <select id="operation">
-        <option value="">Selecione</option>
-        <option value="1">Conversão Binário para Decimal</option>
-        <option value="2">Conversão Decimal para Binário</option>
+      <option value="">Selecione</option>
+      <option value="1">Conversão Binário para Decimal</option>
+      <option value="2">Conversão Decimal para Binário</option>
     </select>
-    <br><br>
+    <br /><br />
     <label for="number">Insira o número:</label>
-    <input type="text" id="number">
-    <br><br>
+    <input type="text" id="number" />
+    <br /><br />
     <button onclick="convert()">Converter</button>
-    <br><br>
-    <p id="result">Resultado: </p>
-</body>
+    <br /><br />
+    <p id="result">Resultado:</p>
+  </body>
 </html>
+
+html
